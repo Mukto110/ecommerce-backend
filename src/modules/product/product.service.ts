@@ -28,8 +28,25 @@ const getSingleProductById = async (id: string) => {
   }
 };
 
+const updateProductById = async (_id: string, data: object) => {
+  try {
+    const result = await ProductModel.findByIdAndUpdate(
+      _id,
+      {
+        $set: data,
+      },
+      { new: true }
+    );
+
+    return result;
+  } catch (error: any) {
+    throw new Error(`Failed to update product: ${error.message}`);
+  }
+};
+
 export const ProductService = {
   createProductIntoDB,
   getAllProductFromDB,
   getSingleProductById,
+  updateProductById,
 };
