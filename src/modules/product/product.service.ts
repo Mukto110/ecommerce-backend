@@ -44,9 +44,19 @@ const updateProductById = async (_id: string, data: object) => {
   }
 };
 
+const deleteSingleProduct = async (_id: string) => {
+  try {
+    const result = await ProductModel.deleteOne({ _id });
+    return result;
+  } catch (error: any) {
+    throw new Error(`Failed to delete product: ${error.message}`);
+  }
+};
+
 export const ProductService = {
   createProductIntoDB,
   getAllProductFromDB,
   getSingleProductById,
   updateProductById,
+  deleteSingleProduct,
 };
